@@ -1,0 +1,96 @@
+ ARSERVERS
+
+1) To check service status 
+
+		-> ps -ef |grep arserv
+
+2) Accessing the bin path for ARSYSTEM -> cd /remedy/ARSystem/bin
+
+
+3) File and Directory commands
+		-> ~ stands for the home directory
+		-> pwd allows you to know in which directory you are located in 
+		
+		
+		
+2) To start or stop application service
+		 
+       to start ./arsystem start
+      to restart ./arsystem restart
+		to view contents of bin ls -lrt
+
+		to restart under bin folder type ./arsystem restart
+
+
+
+Midtier servers
+
+To check if tomcat service is running
+
+
+
+	ps -ef |grep tomcat
+
+to start or shut down tomcat 
+
+cd /app/Apache/Tomcat/RMT/apache-tomcat-7.0.73/bin
+
+List using ls -lrt to view the contents
+
+to start use ./startup.sh
+
+to stop use ./shutdown.sh 
+
+accessing apache logs
+
+
+Emails
+
+To check email status
+
+
+cd /remedy/ARSystem/AREmail
+
+ls -lrt to view contents
+
+to check status use  ./emaild.sh status
+
+
+to start the service ./emaild.sh start
+to stop ./emaild.sh stop
+
+	SMART REPORTING
+cd /app/Apache/Tomcat/RMT/apache-tomcat-6.0.20/bin
+
+commands for checking utilization
+
+df - to check disk space
+free - m or free -g to check memory
+top command to check processes,cpu ,memory utilization
+
+
+	ANALYTICS
+./ccm.sh -restart all -username administrator -password ********
+
+./ccm.sh -restart all -cms srremlinux02.safaricom.net:6400 -username Administrator -password ******
+
+./ccm.sh -enable all -cms srremlinux02.safaricom.net:6400
+
+./ccm.sh -display -cms srremlinux02.safaricom.net:6400 -username Administrator -password *****
+
+
+/ccm.sh -restart srremlinux02safaricomnet -cms srremlinux02.safaricom.net:6400 -username administrator -password *******  -authentication secEnterprise
+
+
+1st steps to troubleshoot analytics
+
+/bmc/BOXI41SP09/sap_bobj
+
+
+shutdown sqlanywhere
+stop servers 
+stop tomcat
+
+start sql anywhere
+start servers
+start tomcat
