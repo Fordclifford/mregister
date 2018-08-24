@@ -42,7 +42,7 @@ public class AgentService {
     private SalesRegionRepository salesRegionRepository;
     
 
-   // private static final Logger logger = LoggerFactory.getLogger(AgentService.class);
+   
 
     public PagedResponse<AgentResponse> getAllAgents(UserPrincipal currentUser, int page, int size) {
         validatePageNumberAndSize(page, size);
