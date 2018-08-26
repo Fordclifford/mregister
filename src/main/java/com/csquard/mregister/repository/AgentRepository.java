@@ -18,12 +18,12 @@ public interface AgentRepository extends JpaRepository<Agent,Long > {
 	
 	Long countByTdrId(Tdr tdr_id);
 		  
-	Page <Agent> findBySalesRegionId( Long salesRegionId, Pageable pageable);
+	List <Agent> findBySalesRegionId( Long salesRegionId);
 	
 	long countBySalesRegionId(Long salesRegionId);
 	
 
-	Page <Agent> findBySalesAreaId( Long salesAreaId, Pageable pageable);
+	List <Agent> findBySalesAreaId( Long salesAreaId);
 	
 	long countBySalesAreaId( Long sales_area_id);
 

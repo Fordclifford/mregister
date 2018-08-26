@@ -50,6 +50,17 @@ public class AgentController {
         
     }
     
+    //find by SalesRegion
+    @GetMapping("/agents/salesregion/{salesRegionId}")
+    @PreAuthorize("hasAnyRole('TDR','ASM','ADMIN','DISTRIBUTOR')")
+    public List<Agent> getAllAgentsBySalesRegion(@PathVariable(value = "salesRegionId") long salesRegionId) {
+    	 if(!salesRegionRepository.existsById(salesRegionId)) {
+             throw new ResourceNotFoundException("SalesRegion", "id", salesRegionId);
+         }
+        return agentRepository.findBySalesRegionId(salesRegionId);
+        
+    }
+    
     // Get  Agents
     @GetMapping("/agents")
    @PreAuthorize("hasAnyRole('TDR','ASM','ADMIN','DISTRIBUTOR')")
@@ -86,6 +97,7 @@ public class AgentController {
 
  // Get a Single Agent
     @GetMapping("/agents/{agent_no}")
+    @PreAuthorize("hasAnyRole('ADMIN','DISTRIBUTOR','TDR','ASM')")
     public Agent getAgentById(@PathVariable(value = "agent_no") Long agentNo) {
         return agentRepository.findById(agentNo)
                 .orElseThrow(() -> new ResourceNotFoundException("Agent", "agent_no", agentNo));
@@ -93,6 +105,7 @@ public class AgentController {
 
  // Update an Agent
     @PutMapping("/agents/{agent_no}")
+    @PreAuthorize("hasAnyRole('ADMIN','DISTRIBUTOR','TDR','ASM')")
     public Agent updateAgent(@PathVariable(value = "agent_no") Long agentNo,
                                             @Valid @RequestBody Agent agentDetails) {
 
@@ -120,6 +133,7 @@ public class AgentController {
     
     // Delete a Agent
     @DeleteMapping("/agents/{agent_no}")
+    @PreAuthorize("hasAnyRole('ADMIN','DISTRIBUTOR','TDR','ASM')")
     public ResponseEntity<?> deleteAgent(@PathVariable(value = "agent_no") Long agentNo) {
         Agent agent = agentRepository.findById(agentNo)
                 .orElseThrow(() -> new ResourceNotFoundException("Agent", "agent_no", agentNo));

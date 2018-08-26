@@ -7,9 +7,7 @@ import com.csquard.mregister.repository.AgentRepository;
 import com.csquard.mregister.repository.UserRepository;
 
 import com.csquard.mregister.security.UserPrincipal;
-import com.csquard.mregister.service.AgentService;
 import com.csquard.mregister.security.CurrentUser;
-import com.csquard.mregister.util.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,8 +21,8 @@ public class UserController {
     @Autowired
     private AgentRepository agentRepository;
 
-    @Autowired
-    private AgentService agentService;
+//    @Autowired
+//    private AgentService agentService;
 
     @GetMapping("/user/me")
    // @PreAuthorize("hasRole('DDR')")
@@ -60,13 +58,13 @@ public class UserController {
         return userProfile;
     }
 
-    @GetMapping("/users/{username}/agents")
-    public PagedResponse<AgentResponse> getAgentsCreatedBy(@PathVariable(value = "username") String username,
-                                                         @CurrentUser UserPrincipal currentUser,
-                                                         @RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
-                                                         @RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size) {
-        return agentService.getAgentsCreatedBy(username, currentUser, page, size);
-    }
+//    @GetMapping("/users/{username}/agents")
+//    public PagedResponse<AgentResponse> getAgentsCreatedBy(@PathVariable(value = "username") String username,
+//                                                         @CurrentUser UserPrincipal currentUser,
+//                                                         @RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
+//                                                         @RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size) {
+//        return agentService.getAgentsCreatedBy(username, currentUser, page, size);
+//    }
 
 
    

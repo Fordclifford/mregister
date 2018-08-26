@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,18 +34,21 @@ public class SalesRegionController {
    	SalesRegionRepository salesRegionRepostory;
 	// Get All SalesRegions
     @GetMapping("/salesregions")
+    @PreAuthorize("hasAnyRole('ADMIN','DISTRIBUTOR')")
     public List<SalesRegion> getAllSalesRegions() {
         return salesRegionRepostory.findAll();
     }
     
  // Create a new SalesRegion
     @PostMapping("/salesregion/create")
+    @PreAuthorize("hasAnyRole('ADMIN','DISTRIBUTOR')")
     public SalesRegion createSalesRegion(@Valid @RequestBody SalesRegion salesRegion) {
         return salesRegionRepostory.save(salesRegion);
     }
 
  // Get a Single SalesRegion
     @GetMapping("/salesregion/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','DISTRIBUTOR')")
     public SalesRegion getSalesRegionById(@PathVariable(value = "id") Long salesRegionId) {
         return salesRegionRepostory.findById(salesRegionId)
                 .orElseThrow(() -> new ResourceNotFoundException("SalesRegion", "id", salesRegionId));
@@ -52,6 +56,7 @@ public class SalesRegionController {
 
  // Update a SalesRegion
     @PutMapping("/salesregion/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','DISTRIBUTOR')")
     public SalesRegion updateSalesRegion(@PathVariable(value = "id") Long salesRegionId,
                                             @Valid @RequestBody SalesRegion salesRegionDetails) {
 
@@ -63,8 +68,9 @@ public class SalesRegionController {
         return updatedSalesRegion;
     }
     
-    // Delete a Asm
+    // Delete a SalesRegion
     @DeleteMapping("/salesregion/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','DISTRIBUTOR')")
     public ResponseEntity<?> deleteSalesRegion(@PathVariable(value = "id") Long salesRegionId) {
         SalesRegion salesRegion = salesRegionRepostory.findById(salesRegionId)
                 .orElseThrow(() -> new ResourceNotFoundException("SalesRegion", "id", salesRegionId));

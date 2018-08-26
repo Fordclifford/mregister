@@ -3,6 +3,7 @@ import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,18 +25,15 @@ public class AsmController {
 	AsmRepository asmRepository;
 	// Get All Asms
     @GetMapping("/asms")
+    @PreAuthorize("hasAnyRole('ADMIN','DISTRIBUTOR')")
     public List<Asm> getAllAsms() {	 
         return asmRepository.findAllAsmsHere();
     }
     
- // Create a new Asm
-    @PostMapping("/asm/create")
-    public Asm createAsm(@Valid @RequestBody Asm asm) {
-        return asmRepository.save(asm);
-    }
 
  // Get a Single Asm
     @GetMapping("/asms/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','DISTRIBUTOR')")
     public Asm getAsmById(@PathVariable(value = "id") Long asmId) {
         return asmRepository.findById(asmId)
                 .orElseThrow(() -> new ResourceNotFoundException("Asm", "id", asmId));
@@ -43,6 +41,7 @@ public class AsmController {
 
  // Update an Asm
     @PutMapping("/asms/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','DISTRIBUTOR')")
     public Asm updateAsm(@PathVariable(value = "id") Long asmId,
                                             @Valid @RequestBody Asm asmDetails) {
 
@@ -53,6 +52,7 @@ public class AsmController {
         asm.setUser_id(asmDetails.getUser_id());
         asm.setFirst_name(asmDetails.getFirst_name());
         asm.setLast_name(asmDetails.getLast_name());
+        asm.setId_no(asmDetails.getId_no());
                
         Asm updatedAsm = asmRepository.save(asm);
         return updatedAsm;
@@ -60,6 +60,7 @@ public class AsmController {
     
     // Delete a Asm
     @DeleteMapping("/asms/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','DISTRIBUTOR')")
     public ResponseEntity<?> deleteAsm(@PathVariable(value = "id") Long asmId) {
         Asm asm = asmRepository.findById(asmId)
                 .orElseThrow(() -> new ResourceNotFoundException("Asm", "id", asmId));

@@ -7,10 +7,13 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,30 +67,39 @@ public class SalesAreaController {
 
  // Get a Single salesarea
     @GetMapping("/salesarea/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','DISTRIBUTOR','ASM')")
     public Optional<SalesArea> getSalesAreaById(@PathVariable(value = "id") Long id) {
         return  salesAreaRepository.findById(id);
     }
 
-// // Update a SalesRegion
-//    @PutMapping("/salesregions/{id}")
-//    public SalesRegion updateSalesRegion(@PathVariable(value = "id") Long salesRegionId,
-//                                            @Valid @RequestBody SalesRegion salesRegionDetails) {
-//
-//    	SalesRegion salesRegion = salesRegionRepostory.findById(salesRegionId)
-//                .orElseThrow(() -> new ResourceNotFoundException("SalesRegion", "id", salesRegionId));
-//    	
-//      salesRegion.setName(salesRegionDetails.getName());                        
-//      SalesRegion updatedSalesRegion = salesRegionRepostory.save(salesRegion);
-//        return updatedSalesRegion;
-//    }
+ // Update a SalesArea
+    @PutMapping("/salesarea/{id}")
     
-//    // Delete a Asm
-//    @DeleteMapping("/salesregions/{id}")
-//    public ResponseEntity<?> deleteAsm(@PathVariable(value = "id") Long salesRegionId) {
-//        SalesRegion salesRegion = salesRegionRepostory.findById(salesRegionId)
-//                .orElseThrow(() -> new ResourceNotFoundException("SalesRegion", "id", salesRegionId));
-//        salesRegionRepostory.delete(salesRegion);        
-//        return ResponseEntity.ok().body(new ApiResponse(true, "Sales Region deleted successfully"));
-//    }
-//	
+    public SalesArea updateSalesArea(@PathVariable(value = "id") Long salesAreaId,
+                                            @Valid @RequestBody SalesArea salesAreaDetails) {
+
+    	SalesArea salesArea = salesAreaRepository.findById(salesAreaId)
+                .orElseThrow(() -> new ResourceNotFoundException("SalesArea", "id", salesAreaId));
+    	
+    	  salesRegionRepository.findById(salesAreaDetails.getSales_region_id())		
+          .orElseThrow(() -> new ResourceNotFoundException("SalesRegion", "id", salesAreaDetails.getSales_region_id()));
+
+    	
+    	
+      salesArea.setName(salesAreaDetails.getName());   
+      salesArea.setSales_region_id(salesAreaDetails.getSales_region_id());
+      SalesArea updatedSalesArea = salesAreaRepository.save(salesArea);
+        return updatedSalesArea;
+    }
+    
+    // Delete a SalesArea
+    @DeleteMapping("/salesareas/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','DISTRIBUTOR','ASM')")
+    public ResponseEntity<?> deleteSalesArea(@PathVariable(value = "id") Long salesAreaId) {
+        SalesArea salesArea = salesAreaRepository.findById(salesAreaId)
+                .orElseThrow(() -> new ResourceNotFoundException("SalesArea", "id", salesAreaId));
+        salesAreaRepository.delete(salesArea);        
+        return ResponseEntity.ok().body(new ApiResponse(true, "Sales Area deleted successfully"));
+    }
+	
 }
