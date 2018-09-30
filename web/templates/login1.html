@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% block body %}
+<div style="width:500px;">
+  <h1>Login</h1>
+  {% from "includes/_formhelpers.html" import render_field %}
+  <form method="POST" action="/login" >
+      <div class="form-group">
+          {{render_field(form.title, class_="form-control")}}
+      </div>
+      <div class="form-group">
+        {{render_field(form.username, class_="form-control")}}
+      </div>
+      <div class="form-group">
+        {{render_field(form.password, class_="form-control")}}
+      </div>
+      <p><button type="submit" class="btn btn-primary">Submit</button></p>
+   <!-- <div class="form-group">
+      <label>Title</label>
+      <select name="title" class="form-control">
+          <option value="{{request.form.saf_distr}}">Safaricom Distributor</option>
+          <option value="{{request.form.asm}}">Area Sales Manager (ASM)</option>
+          <option value="{{request.form.tdr}}">TDR</option>
+        </select>
+    </div>
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" name="username" class="form-control" value={{request.form.username}}>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" name="password" class="form-control" value={{request.form.password}}>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>-->
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>Search Results <small style="color:black; font-size: 20px;"> Welcome {{session.username}}</small></h1>
+
+  <hr>
+  <table class="table table-bordered table-striped table-hover table-sm">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>ID Number</th>
+      <th>Sales Region</th>
+      <th>Sales Area</th>
+      <th>Town</th>
+      <th>Agent Number</th>
+      <th>M-Pesa Name</th>
+      <th>Phone Number</th>
+      <th>IMEI</th>
+      <th>Date Added</th>
+      <th colspan="2">Actions</th>
+
+    </tr>
+    {% for search in records %}
+      <tr>
+        <td>{{search.id}}</td>
+        <td>{{search.name}}</td>
+        <td>{{search.id_no}}</td>
+        <td>{{search.region}}</td>
+        <td>{{search.area}}</td>
+        <td>{{search.town}}</td>
+        <td>{{search.agent_no}}</td>
+        <td>{{search.mpesa_name}}</td>
+        <td>{{search.phone_no}}</td>
+        <td>{{search.imei}}</td>
+        <td>{{search.register_date}}</td>
+        <td><a href="edit_agent/{{search.id}}" class="btn btn-default pull-right">Edit</a></td>
+        <td>
+          <form action="{{url_for('delete_agent', id=search.id)}}" method="post">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Delete" class="btn btn-danger">
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

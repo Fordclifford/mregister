@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>Dashboard <small style="color:black; font-size: 20px;"> Welcome {{session.username}}</small></h1>
+  <a class="btn btn-success" href="/add_agent"> Add Agent</a><br><br>
+    <form action="/search" method="POST">
+        <input type="text" name="search" class="form-control" value="{{ request.form.search}}"style="width:250px;" placeholder="Search using Agent No ..."><br>
+        <div><input type="submit" value="Search" class="btn btn-primary"></div>
+    </form>
+  <hr>
+  <table class="table table-bordered table-striped table-hover table-sm">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>ID Number</th>
+      <th>Sales Region</th>
+      <th>Sales Area</th>
+      <th>Town</th>
+      <th>Agent Number</th>
+      <th>M-Pesa Name</th>
+      <th>Phone Number</th>
+      <th>IMEI</th>
+      <th>Date Added</th>
+      <th colspan="2">Actions</th>
+
+    </tr>
+    {% for agent in agents %}
+      <tr>
+        <td>{{agent.id}}</td>
+        <td>{{agent.name}}</td>
+        <td>{{agent.id_no}}</td>
+        <td>{{agent.region}}</td>
+        <td>{{agent.area}}</td>
+        <td>{{agent.town}}</td>
+        <td>{{agent.agent_no}}</td>
+        <td>{{agent.mpesa_name}}</td>
+        <td>{{agent.phone_no}}</td>
+        <td>{{agent.imei}}</td>
+        <td>{{agent.register_date}}</td>
+        <td><a href="edit_agent/{{agent.id}}" class="btn btn-default pull-right">Edit</a></td>
+        <td>
+          <form action="{{url_for('delete_agent', id=agent.id)}}" method="post">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Delete" class="btn btn-danger">
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
