@@ -24,4 +24,11 @@
 2. If you are using android device, setup a mobile hotspot and connect your computer to the network
 	
 
-  
+# Testing 
+1. To login as admin use 
+	username:admin
+	password:adminpassword
+2. TO login as tdr use
+	username:jmaina
+	password:@@jmaina
+
