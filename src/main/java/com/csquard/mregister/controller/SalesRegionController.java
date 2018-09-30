@@ -34,7 +34,7 @@ public class SalesRegionController {
    	SalesRegionRepository salesRegionRepostory;
 	// Get All SalesRegions
     @GetMapping("/salesregions")
-    @PreAuthorize("hasAnyRole('ADMIN','DISTRIBUTOR')")
+//    @PreAuthorize("hasAnyRole('ADMIN','DISTRIBUTOR')")
     public List<SalesRegion> getAllSalesRegions() {
         return salesRegionRepostory.findAll();
     }
@@ -48,7 +48,7 @@ public class SalesRegionController {
 
  // Get a Single SalesRegion
     @GetMapping("/salesregion/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN','DISTRIBUTOR')")
+//    @PreAuthorize("hasAnyRole('ADMIN','DISTRIBUTOR')")
     public SalesRegion getSalesRegionById(@PathVariable(value = "id") Long salesRegionId) {
         return salesRegionRepostory.findById(salesRegionId)
                 .orElseThrow(() -> new ResourceNotFoundException("SalesRegion", "id", salesRegionId));

@@ -53,46 +53,45 @@ public class Agent extends UserDateAudit   {
 	 */	
 	
 	
-	@Column(name = "sales_region_id",nullable=false)
+	@Column(name = "sales_region_id")
 	 private Long salesRegionId;
 	
 
-	@Column(name = "sales_area_id",nullable=false)
+	@Column(name = "sales_area_id")
 	 private Long salesAreaId;
 	
-	@Column(name = "tdr_id",nullable=false)
+	@Column(name = "tdr_id")
 	 private Long tdrId;	
 
 	
 	@Id
-	@Column(nullable = false)
 	private Long agent_no;
 	
 	@Column(name = "address")
 	private String address;
 	
-	@Column(nullable = false,name = "town")
+	@Column(name = "town")
 	private String town;
 		
-	@Column(nullable = false,name = "signed_name")
+	@Column(name = "signed_name")
 	private String signed_name;
 		
-	@Column(nullable = false,name = "signed_contact")
+	@Column(name = "signed_contact")
 	private Long signed_contact;
 		
-	@Column(nullable = true,name = "mobile")
+	@Column(name = "mobile")
 	private Long mobile;
 	
-	@Column(nullable = false,name = "location")
+	@Column(name = "location")
 	private String location;
 		
-	@Column(nullable = false,name = "device_type")
+	@Column(name = "device_type")
 	private String device_type;
 		
-	@Column(nullable = false,name = "imei_no")
+	@Column(name = "imei_no")
 	private Long imei_no;
 	
-	@Column(nullable = false,name = "id_no")
+	@Column(name = "id_no")
 	private Long id_no;
 		
 	@Column(name = "id_attachment")

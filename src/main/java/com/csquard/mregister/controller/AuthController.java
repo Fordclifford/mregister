@@ -119,9 +119,10 @@ public class AuthController {
         
     salesAreaRepository.findById(signUpRequest.getSales_area_id())		
                 .orElseThrow(() -> new ResourceNotFoundException("SalesArea", "id", signUpRequest.getSales_area_id()));
-        Tdr tdr = new Tdr(signUpRequest.getFirst_name(), signUpRequest.getLast_name(), signUpRequest.getId_no(),user.getId(), signUpRequest.getSales_area_id(), signUpRequest.getAsm_id());
-            
         User result = userRepository.save(user); 
+    Tdr tdr = new Tdr(signUpRequest.getFirst_name(), signUpRequest.getLast_name(), signUpRequest.getId_no(),result.getId(), signUpRequest.getSales_area_id(), signUpRequest.getAsm_id());
+            
+        
         tdrRepository.save(tdr);
           
 
@@ -151,9 +152,7 @@ public class AuthController {
         }
         
 
-        asmRepository.findById(signUpRequest.getSales_region_id())		
-                .orElseThrow(() -> new ResourceNotFoundException("SalesRegion", "id", signUpRequest.getSales_region_id()));
-
+       
         // Creating user's account
         User user = new User(signUpRequest.getName(), signUpRequest.getUsername(),
                 signUpRequest.getEmail(), signUpRequest.getPassword());
@@ -164,13 +163,14 @@ public class AuthController {
                 .orElseThrow(() -> new AppException("User Role not set."));
 
         user.setRoles(Collections.singleton(userRole));
-        
+        User result = userRepository.save(user);
+      
         salesRegionRepository.findById(signUpRequest.getSales_region_id())		
                 .orElseThrow(() -> new ResourceNotFoundException("SalesRegion", "id", signUpRequest.getSales_region_id()));
         
-        Asm asm = new Asm(signUpRequest.getFirst_name(), signUpRequest.getLast_name(), signUpRequest.getId_no(), user.getId(), signUpRequest.getSales_region_id());
+        Asm asm = new Asm(signUpRequest.getFirst_name(), signUpRequest.getLast_name(), signUpRequest.getId_no(),   result.getId(), signUpRequest.getSales_region_id());
         
-        User result = userRepository.save(user);
+        
         asmRepository.save(asm);
 
         URI location = ServletUriComponentsBuilder
@@ -213,7 +213,7 @@ public class AuthController {
     }
     
     @PostMapping("/signup/admin")
-    @PreAuthorize("hasRole('ADMIN')")
+   
     public ResponseEntity<?> registerAdmin(@Valid @RequestBody SignUpRequest signUpRequest) {
         if(userRepository.existsByUsername(signUpRequest.getUsername())) {
             return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),

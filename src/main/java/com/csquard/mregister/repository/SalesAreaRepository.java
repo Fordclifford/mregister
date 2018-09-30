@@ -3,7 +3,7 @@ package com.csquard.mregister.repository;
 import org.springframework.stereotype.Repository;
 
 import com.csquard.mregister.model.SalesArea;
-import com.csquard.mregister.model.Tdr;
+
 
 import java.util.List;
 
@@ -16,6 +16,7 @@ public interface SalesAreaRepository extends JpaRepository<SalesArea, Long>{
     nativeQuery=true)
 List<SalesArea> findAllSalesAreas();
 
+List <SalesArea> findBySalesRegionId( Long salesRegionId);
 
 
 }

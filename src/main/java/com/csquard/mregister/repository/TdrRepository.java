@@ -11,4 +11,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface TdrRepository extends JpaRepository<Tdr, Long> {	  
 	List<Tdr> findByAsmId( long asmId);	
 	  Boolean existsBySalesAreaId(Long salesAreaId);
+	  List<Tdr> findByUserId( long userId);
 }

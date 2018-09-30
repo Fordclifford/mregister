@@ -41,12 +41,21 @@ public class SalesAreaController {
     @Autowired
    	SalesRegionRepository salesRegionRepository;
     
-	// Get All SalesRegions
+	// Get All SalesAreas
     @GetMapping("/salesareas")
     public List<SalesArea> getAllSalesAreas() {
         return salesAreaRepository.findAllSalesAreas();
     }
-    
+    //find all SalesAreas by SalesRegionId
+    @GetMapping("/salesareas/salesregion/{salesRegionId}")
+//    @PreAuthorize("hasAnyRole('ASM','ADMIN','DISTRIBUTOR')")
+    public List<SalesArea> getAllSalesAreasBySalesRegionId(@PathVariable (value = "salesRegionId") Long salesRegionId) {
+    	if(!salesRegionRepository.existsById(salesRegionId)) {
+            throw new ResourceNotFoundException("SalesRegion", "id", salesRegionId);
+        }
+        return salesAreaRepository.findBySalesRegionId(salesRegionId);
+    }
+	
  // Create a new salesarea
 
     @PostMapping("/salesarea/create")
@@ -67,7 +76,7 @@ public class SalesAreaController {
 
  // Get a Single salesarea
     @GetMapping("/salesarea/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN','DISTRIBUTOR','ASM')")
+//    @PreAuthorize("hasAnyRole('ADMIN','DISTRIBUTOR','ASM')")
     public Optional<SalesArea> getSalesAreaById(@PathVariable(value = "id") Long id) {
         return  salesAreaRepository.findById(id);
     }

@@ -1,12 +1,4 @@
 package com.csquard.mregister.payload;
-
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import com.csquard.mregister.model.SalesArea;
-import com.csquard.mregister.model.SalesRegion;
-import com.csquard.mregister.model.Tdr;
 import com.csquard.mregister.payload.UserSummary;
 
 public class AgentResponse {

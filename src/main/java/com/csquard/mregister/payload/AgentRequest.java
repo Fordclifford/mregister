@@ -9,56 +9,56 @@ import javax.validation.constraints.Size;
 
 public class AgentRequest {
 	
-	@NotNull
+	
 	private Long agent_no;
 	
-	@NotBlank
+	
     @Size(max = 100)
 	private String address;
 	
-	@NotBlank
+	
     @Size(max = 100)
 	private String town;
 		
-	@NotBlank
+	
     @Size(max = 100)
 	private String signed_name;
 		
-	@NotNull
+	
 	private Long signed_contact;
 		
-	@NotNull
+	
 	private Long mobile;
 	
-	@NotBlank
+	
     @Size(max = 100)
 	private String location;
 		
-	@NotBlank
+
     @Size(max = 100)
 	private String device_type;
 		
-	@NotNull
+	
 	private Long imei_no;
 	
-	@NotNull
+	
 	private Long id_no;
 		
-	@NotBlank
+
     @Size(max = 100)
 	private String id_attachment;
 	
-	@NotBlank
+	
     @Size(max = 100)
 	private String signature;
 	
-	@NotNull
+	
 	private Long tdr_id;
 	
-	@NotNull
+
 	private Long sales_area_id;
 	
-	@NotNull
+	
 	private Long sales_region_id;
 	
 	public Long getAgent_no() {
