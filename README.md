@@ -3,6 +3,20 @@
     M-Register Application
 
 # Requirements
+<<<<<<< HEAD
+    Python Flask installed and running.
+    Mysql installed and running.
+
+ # Running the Application
+
+ 1. Execute the m-register.sql file in your server to configure the Database
+
+ 2. Execute the following command
+    'python app.py'
+
+3. Navigate to the following link or to the server configuration that you are using e. g
+   https://127.0.0.1/5005 for localhost
+=======
      Mysql installed and running.
      Java installed and working
 
@@ -31,4 +45,5 @@
 2. TO login as tdr use
 	username:jmaina
 	password:@@jmaina
+>>>>>>> 97f7824d90a5ad7679914b4efccb4da1151ec8b0
 
