@@ -87,7 +87,7 @@ public class AgentController {
 //         tdrRepository.findById(agentRequest.getTdr_id())        		 
 //                 .orElseThrow(() -> new ResourceNotFoundException("Tdr", "id", agentRequest.getTdr_id()));
 //         
-      Agent agent =new Agent(agentRequest.getSales_area_id(), agentRequest.getSales_area_id(), agentRequest.getTdr_id(), agentRequest.getAgent_no(), agentRequest.getAddress(), agentRequest.getTown(), agentRequest.getSigned_name(), agentRequest.getSigned_contact(), agentRequest.getMobile(), agentRequest.getLocation(), agentRequest.getDevice_type(), agentRequest.getImei_no(), agentRequest.getId_no(), agentRequest.getId_attachment(), agentRequest.getSignature());
+      Agent agent =new Agent(agentRequest.getSales_region_id(), agentRequest.getSales_area_id(), agentRequest.getTdr_id(), agentRequest.getAgent_no(), agentRequest.getAddress(), agentRequest.getTown(), agentRequest.getSigned_name(), agentRequest.getSigned_contact(), agentRequest.getMobile(), agentRequest.getLocation(), agentRequest.getDevice_type(), agentRequest.getImei_no(), agentRequest.getId_no(), agentRequest.getId_attachment(), agentRequest.getSignature());
          
      Agent result = agentRepository.save(agent);
      return result;
